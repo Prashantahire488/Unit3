@@ -1,53 +1,71 @@
-let div1 = document.getElementById("div1");
-async function News(){
-   let res = await fetch(`https://newsapi.org/v2/everything?q=world&from=2021-10-18&sortBy=popularity&apiKey=bca15799205646a794e7582a6a80b40a`)
+function search()
+{
+    let News = document.getElementById("news").value;
 
-   let data = await res.json()
-   
+    if(localStorage.getItem("news")==null)
+    {
+        localStorage.setItem("news",JSON.stringify([]));
+    }
 
-    data = data.articles;
-    console.log(data)
-
-    data.forEach((news)=>{
-        console.log(news)
-        let title = document.createElement("div");
-        title.innerText = news.title;
+    let srngsnews = JSON.parse(localStorage.getItem("news"));
     
-        let desc = document.createElement("p");
-        desc.innerText = news.description;
- 
+    news.push(news);
 
-        let img = document.createElement("img")
-        img.src = news.urlToImage;
+    localStorage.setItem("news",JSON.stringify(news));
+
+    window.location.href = "Search.html";
+}
+
+    
 
 
-        let News1 = document.createElement("div")
 
-        News1.onclick = function(){
-            details(news)
+async function NewsShow()
+{
+    let res = await fetch("http://newsapi.org/v2/everything?q=apple&from=2021-10-17&to=2021-10-17&sortBy=popularity&apiKey=bca15799205646a794e7582a6a80b40a")
+
+    let data = await res.json()
+    
+    data = data.articles;
+
+    //console.log(data);
+
+    let News1 = document.getElementById("News1");
+
+    data.forEach(News2 => 
+    {
+        let div = document.createElement("div");
+        
+        let img = document.createElement("img");
+        img.src = News2.urlToImage
+
+        let Title = document.createElement("p");
+
+        Title.append(News2.title);
+
+        div.append(img,Title);
+
+        div.onclick = function()
+        {
+            if(localStorage.getItem("news")==null)
+            {
+                localStorage.setItem("news",JSON.stringify([]));
+            }
+
+            let srngnews = JSON.parse(localStorage.getItem("news"));
+           
+            news.push(News2);
+
+
+            localStorage.setItem("news",JSON.stringify(news));
+
+            window.location.href = "News.html";
         }
 
-        news_box.append(title, desc, img)
+        main.append(div);
 
-        div1.append(news_box)
-    })
+    });
+
 }
 
-News()
-
-
-
-function details(news){
-    localStorage.setItem("news",JSON.stringify(news))
-    location.href = "news.html"
-}
-
-function Search(){
-    let keywords = document.getElementById("search").value;
-
-    console.log(keywords)
-    
-    localStorage.setItem("search",JSON.stringify())
-
-    location.href = "search.html"
-}
+NewsShow();
