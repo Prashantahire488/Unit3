@@ -7,13 +7,13 @@ function search()
         localStorage.setItem("news",JSON.stringify([]));
     }
 
-    let srngsnews = JSON.parse(localStorage.getItem("news"));
+    let snews = JSON.parse(localStorage.getItem("news"));
     
     news.push(news);
 
     localStorage.setItem("news",JSON.stringify(news));
 
-    window.location.href = "Search.html";
+    window.location.href = "Search1.html";
 }
 
     
@@ -52,7 +52,7 @@ async function NewsShow()
                 localStorage.setItem("news",JSON.stringify([]));
             }
 
-            let srngnews = JSON.parse(localStorage.getItem("news"));
+            let news = JSON.parse(localStorage.getItem("news"));
            
             news.push(News2);
 
@@ -62,7 +62,7 @@ async function NewsShow()
             window.location.href = "News.html";
         }
 
-        main.append(div);
+        News1.append(div);
 
     });
 
